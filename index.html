@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>is-3D Lab</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:   #e03030;
+      --dark:  #111213;
+      --mid:   #1c1e20;
+      --light: #c8cdd4;
+      --white: #f0f2f4;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Grid de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(224,48,48,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(224,48,48,.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridMove 8s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      from { background-position: 0 0; }
+      to   { background-position: 40px 40px; }
+    }
+
+    /* Brilho central */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(224,48,48,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 48px 40px 40px;
+      background: var(--mid);
+      border: 1px solid rgba(224,48,48,.25);
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04) inset,
+        0 24px 80px rgba(0,0,0,.6),
+        0 0 40px rgba(224,48,48,.08);
+      animation: cardIn .5s cubic-bezier(.22,1,.36,1) both;
+      max-width: 320px;
+      width: 90vw;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px) scale(.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Detalhe de canto superior esquerdo */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 24px; height: 24px;
+      border-top: 2px solid var(--red);
+      border-left: 2px solid var(--red);
+      border-radius: 4px 0 0 0;
+    }
+
+    /* Detalhe de canto inferior direito */
+    .card::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 24px; height: 24px;
+      border-bottom: 2px solid var(--red);
+      border-right: 2px solid var(--red);
+      border-radius: 0 0 4px 0;
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      animation: logoIn .6s .1s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @keyframes logoIn {
+      from { opacity: 0; transform: scale(.8); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .logo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(224,48,48,.35);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .logo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(224,48,48,.15);
+      animation: pulse 2s .4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1);    opacity: 1; }
+      50%       { transform: scale(1.06); opacity: .5; }
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .text-block {
+      text-align: center;
+      animation: textIn .6s .2s cubic-bezier(.22,1,.36,1) both;
+    }
+
+    @keyframes textIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--light);
+      letter-spacing: .05em;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      animation: dotsIn .4s .3s both;
+    }
+
+    @keyframes dotsIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: dotBounce 1.2s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: .15s; background: rgba(224,48,48,.6); }
+    .dot:nth-child(3) { animation-delay: .30s; background: rgba(224,48,48,.3); }
+
+    @keyframes dotBounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40%            { transform: translateY(-6px); }
+    }
+
+    .status {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: .15em;
+      color: rgba(200,205,212,.35);
+      text-transform: uppercase;
+      animation: textIn .6s .35s both;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-wrap">
+    <img class="logo" src="data:image/jpeg;base64,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" alt="is-3D Lab" />
+  </div>
+
+  <div class="text-block">
+    <p class="label">Abrindo Instagram</p>
+    <p class="tagline">Impressão 3D profissional</p>
+  </div>
+
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <p class="status">Redirecionando&nbsp;&nbsp;▶</p>
+</div>
+
+<script>
+  var INSTA_USER = 'is3dlab';
+  var INSTA_WEB  = 'https://instagram.com/' + INSTA_USER;
+  var ua = navigator.userAgent || '';
+
+  function goWeb() { window.location.replace(INSTA_WEB); }
+
+  if (/android/i.test(ua)) {
+    // Tenta intent nativo do Android (abre app com fallback para browser)
+    window.location.replace(
+      'intent://instagram.com/' + INSTA_USER +
+      '#Intent;scheme=https;package=com.instagram.android;' +
+      'S.browser_fallback_url=' + encodeURIComponent(INSTA_WEB) + ';end'
+    );
+  } else if (/iphone|ipad|ipod/i.test(ua)) {
+    // Deep link iOS; fallback para web após 1.6s caso app não esteja instalado
+    window.location.replace('instagram://user?username=' + INSTA_USER);
+    setTimeout(goWeb, 1600);
+  } else {
+    goWeb();
+  }
+</script>
+
+</body>
+</html>
