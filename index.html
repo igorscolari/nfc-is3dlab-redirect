@@ -27,7 +27,6 @@
       overflow: hidden;
     }
 
-    /* Grid de fundo */
     body::before {
       content: '';
       position: fixed;
@@ -45,7 +44,6 @@
       to   { background-position: 40px 40px; }
     }
 
-    /* Brilho central */
     body::after {
       content: '';
       position: fixed;
@@ -60,7 +58,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 28px;
+      gap: 24px;
       padding: 48px 40px 40px;
       background: var(--mid);
       border: 1px solid rgba(224,48,48,.25);
@@ -79,7 +77,6 @@
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Detalhe de canto superior esquerdo */
     .card::before {
       content: '';
       position: absolute;
@@ -90,7 +87,6 @@
       border-radius: 4px 0 0 0;
     }
 
-    /* Detalhe de canto inferior direito */
     .card::after {
       content: '';
       position: absolute;
@@ -170,39 +166,47 @@
       letter-spacing: .05em;
     }
 
-    .dots {
+    .btn {
       display: flex;
-      gap: 6px;
-      animation: dotsIn .4s .3s both;
-    }
-
-    @keyframes dotsIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
       background: var(--red);
-      animation: dotBounce 1.2s ease-in-out infinite;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      animation: textIn .6s .3s cubic-bezier(.22,1,.36,1) both;
+      transition: background .15s, transform .1s;
+      width: 100%;
+      justify-content: center;
     }
-    .dot:nth-child(2) { animation-delay: .15s; background: rgba(224,48,48,.6); }
-    .dot:nth-child(3) { animation-delay: .30s; background: rgba(224,48,48,.3); }
 
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: translateY(0); }
-      40%            { transform: translateY(-6px); }
+    .btn:active {
+      background: #b82020;
+      transform: scale(.97);
     }
 
-    .status {
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .hint {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
-      letter-spacing: .15em;
-      color: rgba(200,205,212,.35);
+      letter-spacing: .12em;
+      color: rgba(200,205,212,.3);
       text-transform: uppercase;
-      animation: textIn .6s .35s both;
+      text-align: center;
+      animation: textIn .6s .4s cubic-bezier(.22,1,.36,1) both;
     }
   </style>
 </head>
@@ -214,40 +218,41 @@
   </div>
 
   <div class="text-block">
-    <p class="label">Abrindo Instagram</p>
+    <p class="label">is-3D Lab</p>
     <p class="tagline">Impressão 3D profissional</p>
   </div>
 
-  <div class="dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
+  <a class="btn" id="btn" href="https://instagram.com/is3dlab">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </svg>
+    Ver no Instagram
+  </a>
 
-  <p class="status">Redirecionando&nbsp;&nbsp;▶</p>
+  <p class="hint">Toque para abrir</p>
 </div>
 
 <script>
   var INSTA_USER = 'is3dlab';
   var INSTA_WEB  = 'https://instagram.com/' + INSTA_USER;
   var ua = navigator.userAgent || '';
+  var btn = document.getElementById('btn');
 
-  function goWeb() { window.location.replace(INSTA_WEB); }
-
+  // Monta a URL correta para cada plataforma
   if (/android/i.test(ua)) {
-    // Tenta intent nativo do Android (abre app com fallback para browser)
-    window.location.replace(
-      'intent://instagram.com/' + INSTA_USER +
+    btn.href = 'intent://instagram.com/' + INSTA_USER +
       '#Intent;scheme=https;package=com.instagram.android;' +
-      'S.browser_fallback_url=' + encodeURIComponent(INSTA_WEB) + ';end'
-    );
+      'S.browser_fallback_url=' + encodeURIComponent(INSTA_WEB) + ';end';
   } else if (/iphone|ipad|ipod/i.test(ua)) {
-    // Deep link iOS; fallback para web após 1.6s caso app não esteja instalado
-    window.location.replace('instagram://user?username=' + INSTA_USER);
-    setTimeout(goWeb, 1600);
-  } else {
-    goWeb();
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.location = 'instagram://user?username=' + INSTA_USER;
+      setTimeout(function() {
+        window.location = INSTA_WEB;
+      }, 1600);
+    });
   }
+  // Desktop e outros: href já é INSTA_WEB por padrão
 </script>
 
 </body>
